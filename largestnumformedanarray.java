@@ -1,0 +1,17 @@
+class Solution {
+    String printLargest(int n, String[] arr) {
+        
+        StringBuilder temp = new StringBuilder();
+        Arrays.sort(arr,new Comparator<String>(){
+            @Override
+            public int compare(String x, String y){
+                String a=x+y;
+                String b = y+x;
+                return b.compareTo(a);
+            }
+        });
+        for(String x:arr) temp.append(x);
+        return temp.toString();
+        
+    }
+}
