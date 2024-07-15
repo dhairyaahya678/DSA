@@ -49,14 +49,16 @@ class Solution{
         for(int num :arr){
             map.put(num,map.getOrDefault(num,0)+1);
         }
+        
         for(int i = 0;i<N;i++){
             if(map.containsKey(i+1)){
-                arr[i]=map.get(i+1);
+                arr[i] = map.get(i+1);
             }
             else{
-                arr[i]=0;
+                arr[i] = 0;
                 
             }
+            
         }
     }
 }
