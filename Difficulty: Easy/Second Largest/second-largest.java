@@ -30,17 +30,16 @@ public class Main {
 
 class Solution {
     public int print2largest(List<Integer> arr) {
-        
-        int max = -1;
-        int smax = -1;
         // Code Here
-        for(int num:arr){
-            if(num>max){
-                smax = max;
-                max=num;
+        int max = Integer.MIN_VALUE;
+        int smax = Integer.MIN_VALUE;
+        for(int i:arr){
+            if(i>max){
+                smax=max;
+                max=i;
             }
-            else if(max>num && num>smax){
-                smax = num;
+            else if(i<max && i>smax){
+                smax=i;
             }
         }
         return smax;
