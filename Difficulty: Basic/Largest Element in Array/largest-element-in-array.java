@@ -50,13 +50,9 @@ class Solution {
     public static int largest(int n, int[] arr) {
         // code here
         int max = Integer.MIN_VALUE;
-        for(int num : arr){
-            if(num>max){
-                max=num;
-            }
+        for(int i:arr){
+            max=Math.max(i,max);
         }
         return max;
-        
-        
     }
 }
