@@ -29,7 +29,7 @@ class GFG {
 class Solution{
     public String removeConsecutiveCharacter(String S){
         StringBuilder sb = new StringBuilder();
-        for(int i = 0;i<S.length();i++){
+        for(int i=0;i<S.length();i++){
             if(i==0||S.charAt(i)!=S.charAt(i-1)){
                 sb.append(S.charAt(i));
             }
