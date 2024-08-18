@@ -47,34 +47,34 @@ class Solution {
     // Function to find the leaders in the array.
     static ArrayList<Integer> leaders(int n, int arr[]) {
         // Your code here
-        // ArrayList<Integer> list = new ArrayList<>();
-        // int max = arr[n-1];
-        // list.add(arr[n-1]);
-        // for(int i=n-1;i>=0;i--){
-        //     if(arr[i]>max){
-        //         list.add(arr[i]);
-        //         max = arr[i]; 
-        //     }
-        // }
-        // Collections.reverse(list);
-        // return list;
-        
-        ArrayList<Integer> result = new ArrayList<>();
-
-        int maxRight = arr[n - 1];
-
-        result.add(maxRight);
-
-
-        for (int i = n - 2; i >= 0; i--) {
-            if (arr[i] >= maxRight) {
-                maxRight = arr[i];
-                result.add(maxRight);
+        ArrayList<Integer> list = new ArrayList<>();
+        int max = arr[n-1];
+        list.add(arr[n-1]);
+        for(int i=n-2;i>=0;i--){
+            if(arr[i]>=max){
+                list.add(arr[i]);
+                max = arr[i]; 
             }
         }
+        Collections.reverse(list);
+        return list;
+        
+        // ArrayList<Integer> result = new ArrayList<>();
 
-        Collections.reverse(result);
+        // int maxRight = arr[n - 1];
 
-        return result;
+        // result.add(maxRight);
+
+
+        // for (int i = n - 2; i >= 0; i--) {
+        //     if (arr[i] >= maxRight) {
+        //         maxRight = arr[i];
+        //         result.add(maxRight);
+        //     }
+        // }
+
+        // Collections.reverse(result);
+
+        //return result;
     }
 }
