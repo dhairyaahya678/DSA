@@ -38,14 +38,12 @@ class Solution {
         // code here
         for(int i=0;i<n;i++){
             if(arr[i]!=0){
-                arr[c]=arr[i];
+                arr[c] = arr[i];
                 c++;
             }
         }
-        while(c<n){
-            arr[c]=0;
-            c++;
+        for(int i = c;i<n;i++){
+            arr[i]=0;
         }
-        
     }
 }
