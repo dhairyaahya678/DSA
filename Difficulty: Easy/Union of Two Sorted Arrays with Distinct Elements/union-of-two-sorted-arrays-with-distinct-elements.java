@@ -50,18 +50,31 @@ class Solution {
     // Function to return a list containing the union of the two arrays.
     public static ArrayList<Integer> findUnion(int a[], int b[]) {
         // add your code here
-        HashSet<Integer> set = new HashSet<>();
-        for(int i:a){
-            set.add(i);
-        }
-        for(int i:b){
-            set.add(i);
-        }
         ArrayList<Integer> list = new ArrayList<>();
-        for(int i:set){
-            list.add(i);
+        
+        int i=0;
+        int j=0;
+        while(i<a.length && j<b.length){
+            if(a[i]<b[j]){
+                list.add(a[i]);
+                i++;
+            }
+            else if(b[j]<a[i]){
+                list.add(b[j]);
+                j++;
+            }
+            else{
+                list.add(a[i]);
+                i++;
+                j++;
+            }
         }
-        Collections.sort(list);
+        while(i<a.length){
+            list.add(a[i++]);
+        }
+        while(j<b.length){
+            list.add(b[j++]);
+        }
         return list;
     }
 }
