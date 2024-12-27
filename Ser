@@ -1,0 +1,28 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+class LocationService {
+  static Future<Map<String, String>> fetchLocationData(String lat, String lng) async {
+    final url = Uri.parse('https://api.example.com/location?lat=$lat&lng=$lng'); // Replace with actual API
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        return {
+          'Name': data['name'] ?? '',
+          'Road': data['road'] ?? '',
+          'Town': data['town'] ?? '',
+          'City': data['city'] ?? '',
+          'State': data['state'] ?? '',
+          'Pincode': data['pincode'] ?? '',
+          'Country': data['country'] ?? '',
+        };
+      } else {
+        throw Exception('Failed to load location data');
+      }
+    } catch (e) {
+      print(e);
+      return {};
+    }
+  }
+}
