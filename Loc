@@ -1,0 +1,66 @@
+import 'package:flutter/material.dart';
+import '../services/location_service.dart';
+
+class LocationScreen extends StatefulWidget {
+  @override
+  _LocationScreenState createState() => _LocationScreenState();
+}
+
+class _LocationScreenState extends State<LocationScreen> {
+  TextEditingController _latController = TextEditingController();
+  TextEditingController _lngController = TextEditingController();
+  Map<String, String> _locationData = {};
+
+  void fetchAndSetLocationData(String lat, String lng) async {
+    final data = await LocationService.fetchLocationData(lat, lng);
+    setState(() {
+      _locationData = data;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Fetch Location Data')),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: _latController,
+              decoration: InputDecoration(labelText: 'Enter Latitude'),
+              keyboardType: TextInputType.number,
+            ),
+            TextField(
+              controller: _lngController,
+              decoration: InputDecoration(labelText: 'Enter Longitude'),
+              keyboardType: TextInputType.number,
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                final lat = _latController.text;
+                final lng = _lngController.text;
+                if (lat.isNotEmpty && lng.isNotEmpty) {
+                  fetchAndSetLocationData(lat, lng);
+                }
+              },
+              child: Text('Fetch Data'),
+            ),
+            SizedBox(height: 20),
+            Expanded(
+              child: ListView(
+                children: _locationData.entries.map((entry) {
+                  return ListTile(
+                    title: Text(entry.key),
+                    subtitle: Text(entry.value.isNotEmpty ? entry.value : 'N/A'),
+                  );
+                }).toList(),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
