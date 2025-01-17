@@ -2,27 +2,35 @@
 import java.io.*;
 import java.util.*;
 
-class GFG
-{
-    public static void main(String args[])throws IOException
-    {
+class GFG {
+    public static void main(String args[]) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         int t = Integer.parseInt(read.readLine());
-        while(t-- > 0)
-        {
+        while (t-- > 0) {
             int N = Integer.parseInt(read.readLine());
             Solution ob = new Solution();
             System.out.println(ob.factorial(N));
+
+            System.out.println("~");
         }
     }
 }
 // } Driver Code Ends
 
 
-class Solution{
-    static long factorial(int N){
+class Solution {
+    static int factorial(int n) {
         // code here
-        if(N==1||N==0) return 1;
-        return N*factorial(N-1);
+        // if(n==1){
+        //     return 1;
+        // }
+        
+        // return n*factorial(n-1);
+        int ans=1;
+        for(int i=1;i<=n;i++){
+            ans*=i;
+        }
+        return ans;
+        
     }
 }
