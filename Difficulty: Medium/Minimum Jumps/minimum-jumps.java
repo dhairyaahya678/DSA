@@ -1,22 +1,33 @@
 //{ Driver Code Starts
+// Initial Template for Java
+
 import java.io.*;
-import java.lang.*;
 import java.util.*;
 
-class GFG {
-    public static void main(String[] args) throws IOException {
+public class Main {
 
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int t = Integer.parseInt(br.readLine());
-
+        int t;
+        t = Integer.parseInt(br.readLine());
         while (t-- > 0) {
-            int size = Integer.parseInt(br.readLine());
-            String[] arrStr = ((String)br.readLine()).split("\\s+");
-            int[] arr = new int[size];
-            for (int i = 0; i < size; i++) {
-                arr[i] = Integer.parseInt(arrStr[i]);
+            String line = br.readLine();
+            String[] tokens = line.split(" ");
+
+            // Create an ArrayList to store the integers
+            ArrayList<Integer> array = new ArrayList<>();
+
+            // Parse the tokens into integers and add to the array
+            for (String token : tokens) {
+                array.add(Integer.parseInt(token));
             }
-            System.out.println(new Solution().minJumps(arr, size));
+
+            int[] arr = new int[array.size()];
+            int idx = 0;
+            for (int i : array) arr[idx++] = i;
+
+            System.out.println(new Solution().minJumps(arr));
+            System.out.println("~");
         }
     }
 }
@@ -25,40 +36,38 @@ class GFG {
 
 
 class Solution {
-    static int minJumps(int[] arr, int n) {
-        // your code here
-        if (n <= 1) return 0; // If the array length is 0 or 1, no jumps needed
-        
-        // Initialize variables to keep track of the farthest index we can reach,
-        // the current end of the jump, and the number of jumps made.
-        int jumps = 0;
-        int curEnd = 0;
-        int farthest = 0;
-        
-        for (int i = 0; i < n - 1; i++) {
-            // Update the farthest index we can reach from the current index
+    static int minJumps(int[] arr) {
+        // code here
+        int n = arr.length;
+
+        // If the array has only one element, no jump is needed
+        if (n <= 1) return 0;
+
+        // If the first element is 0, we can't move anywhere
+        if (arr[0] == 0) return -1;
+
+        // Initialize variables
+        int jumps = 1; // At least one jump is needed initially
+        int farthest = arr[0]; // Farthest we can reach
+        int currEnd = arr[0];  // Current jump's range
+
+        for (int i = 1; i < n; i++) {
+            // If we've reached the last index, return jumps
+            if (i == n - 1) return jumps;
+
+            // Update the farthest we can reach
             farthest = Math.max(farthest, i + arr[i]);
-            
-            // If we reach the end of the current jump range, make a jump
-            if (i == curEnd) {
+
+            // If we reach the end of the current jump range
+            if (i == currEnd) {
                 jumps++;
-                curEnd = farthest;
-                
-                // If at any point the current end surpasses or reaches the last index,
-                // return the number of jumps made
-                if (curEnd >= n - 1) {
-                    return jumps;
-                }
-                
-                // If we can't move forward from a point (arr[i] == 0) and we're stuck,
-                // return -1 indicating it's not possible to reach the end
-                if (i == curEnd && arr[i] == 0) {
-                    return -1;
-                }
+                currEnd = farthest;
+
+                // If the current range doesn't extend further, we can't proceed
+                if (currEnd <= i) return -1;
             }
         }
-        
-        return jumps;
-            
+
+        return -1;
     }
 }
